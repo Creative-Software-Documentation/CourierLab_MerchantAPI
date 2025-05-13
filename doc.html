@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scribbler Documentation - a code documentation page template for codrops</title>
+    <title>Courier Lab - a Leading Courier Software In Bangladesh</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="scribbler-global.css">
@@ -17,259 +17,3725 @@
       <h1 class="logo">Merchant<span class="logo__thin"> API</span></h1>
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
-        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
-        <li class="menu__item"><a href="https://www.creativesoftware.com.bd/" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+        <li class="menu__item"><a href="https://github.com/Creative-Software-Documentation" target="_blank" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="https://www.creativesoftware.com.bd/" target="_blank" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
     <div class="wrapper">
       <aside class="doc__nav">
         <ul>
-          <li class="js-btn selected">Add_Parcel</li>
-          <li class="js-btn">Coverage_area_list</li>
+          <li class="js-btn selected">Add Parcel</li>
+          <li class="js-btn">Coverage area list</li>
           <li class="js-btn">District</li>
           <li class="js-btn">Weight</li>
-          <li class="js-btn">Product_Category</li>
+          <li class="js-btn">Product Category</li>
         </ul>
       </aside>
       <article class="doc__content">
         <section class="js-section">
-          <h3 class="section__title">Add Parcel</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
+          <h3 class="section__title">Add Parcel (POST)</h3>
+          <p>This endpoint allows you to add a new parcel by making an HTTP POST request to the specified URL. The request should include form-data in the body with parameters such as merchant_id, customer_name, customer_email, customer_phone, customer_address, district_id, area_id, pickup_date, pickup_time, remarks, category_name, selling_price, order_id, collection, delivery_type, and weight.</p>
             <div class="code__block code__block--notabs">
-            <pre class="code code--block">
+            <h5>Example Request</h5>
+              <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+              --location 'https://example.com/api/add-parcel' \
+              --header 'Accept: application/json' \
+              --form 'merchant_id="1306"' \
+              --form 'customer_name="Test customer234"' \
+              --form 'customer_phone="01798737512"' \
+              --form 'customer_address="Dhaka,Bangladesh"' \
+              --form 'district_id="47"' \
+              --form 'area="Dhanmondi"' \
+              --form 'remarks="done"' \
+              --form 'category_name="Gadget"' \
+              --form 'selling_price="300"' \
+              --form 'order_id="123"' \
+              --form 'collection="300"' \
+              --form 'delivery_type="Regular"' \
+              --form 'weight="Up to 0.15KG"'
+              </code>
+            </pre>
+            <h5>Example Response (Body)</h5>
+              <pre class="code code--block">
+              <code>
+                {
+                "status": true,
+                "message": "Order Create Successfully",
+                "data": {
+                  "tracking_id": "202505120",
+                  "colection": "300",
+                  "delivery": 50,
+                  "insurance": 0,
+                  "cod": 2.5,
+                  "return_charge": 0,
+                  "merchant_pay": 247,
+                  "updated_at": "2025-05-13T09:29:16.000000Z",
+                  "created_at": "2025-05-13T09:29:16.000000Z",
+                  "id": 106
+                }
+              }
+              </code>
+            </pre>
+                <h5>Request Body Parameters</h5>
+               <pre class="code code--block">
+              <code>
+             --merchant_id (number): merchant Id is required.
+             --customer_name (text): customer name id required.
+             --customer_phone (number): customer phone number is required.
+             --customer_address (text): customer address is required.
+             --district_id (number): District id is required.
+             --area (string): Area Id is required.
+             --remarks (text): Any additional remarks(optional).
+             --category_name (text): The category of the parcel(optional).
+             --selling_price (text): The selling price of the parcel(required).
+             --order_id (number): The ID of the order(optional).
+             --collection (number): Collection details(required).
+             --delivery_type (text): The type of delivery(required)(Regular or Urgent).
+             --weight (text): The weight of the parcel(required).
               </code>
             </pre>
           </div>
+           <h5>Request Body Parameters</h5>
+             <p>Upon successful execution, the response will have a status of 200 and a JSON content type. The response body will contain a boolean status, an empty message, and data including tracking_id, collection, delivery, insurance, cod, return_charge, merchant_pay, updated_at, created_at, and id.</p>
+           <h5>HEADERS</h5>
+             <p>Accept    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       application/json</p>
+             <h5>Body (formdata)</h5>
            <table id="customers">
             <tr>
-              <th>Options</th>
+              <th>Variable</th>
               <th>Value</th>
-              <th>Default</th>
             </tr>
             <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
+              <td>merchant_id</td>
+              <td>1306</td>
             </tr>
             <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
+              <td>customer_name</td>
+              <td>Monir Mia</td>
             </tr>
             <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
+              <td>customer_phone</td>
+              <td>01700000000</td>
+            </tr>
+             <tr>
+              <td>customer_address</td>
+              <td>Dhaka,Bangladesh</td>
+            </tr>
+             <tr>
+              <td>district_id</td>
+              <td>10</td>
+            </tr>
+             <tr>
+              <td>area</td>
+              <td>Dhanmondi</td>
+            </tr>
+             <tr>
+              <td>remarks</td>
+              <td>Any text here</td>
+            </tr>
+             <tr>
+              <td>category_name</td>
+              <td>Gadget</td>
+            </tr>
+             <tr>
+              <td>selling_price</td>
+              <td>1500</td>
+            </tr>
+             <tr>
+              <td>order_id</td>
+              <td>4566</td>
+            </tr>
+             <tr>
+              <td>collection</td>
+              <td>1000</td>
+            </tr>
+             <tr>
+              <td>delivery_type</td>
+              <td>Regular</td>
+            </tr>
+             <tr>
+              <td>weight</td>
+              <td>Up to 0.15KG</td>
             </tr>
           </table>
-          <h3 class="section__title">Weight</h3>
-           <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
-          <div class="code__block code__block--notabs">
-            <pre class="code code--block">
-              <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
-              </code>
-            </pre>
-          </div>
-           <table id="customers">
-            <tr>
-              <th>Options</th>
-              <th>Value</th>
-              <th>Default</th>
-            </tr>
-            <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
-            </tr>
-          </table>
-        </section>
+          
         <section class="js-section">
-          <h3 class="section__title">Coverage area list</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
+          <h3 class="section__title">Coverage area list (GET)</h3>
+          <p>This API endpoint makes an HTTP GET request to retrieve the distribution area details based on the provided ID. The response will be in JSON format with a 200 status code. The response will include a boolean status, a message, and an array of data objects containing information about the distribution areas such as ID, inside, zone name, district, area, district ID, zone ID, post code, delivery options, COD (Cash on Delivery) availability, insurance, status, creation and update timestamps.</p>
+             <h5>Example Request</h5>
               <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+                --location 'https://example.com/api/dist-area?id=47'
               </code>
             </pre>
-          <table id="customers">
-            <tr>
-              <th>Options</th>
-              <th>Value</th>
-              <th>Default</th>
-            </tr>
-            <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
-            </tr>
-          </table>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-          <hr />
-        </section>
-        <section class="js-section">
-          <h3 class="section__title">District</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
+              <h5>Example Response (BODY)</h5>
               <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+              {
+  "Status": true,
+  "message": "Coverage List",
+  "data": [
+    {
+      "id": 136,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Adabor",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:52:34.000000Z",
+      "updated_at": "2023-01-07T10:12:15.000000Z"
+    },
+    {
+      "id": 32,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Aftabnagar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:53:03.000000Z",
+      "updated_at": "2023-01-07T10:43:19.000000Z"
+    },
+    {
+      "id": 139,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Agargaon",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:53:35.000000Z",
+      "updated_at": "2023-01-07T10:06:36.000000Z"
+    },
+    {
+      "id": 103,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Ashkona",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:59:14.000000Z",
+      "updated_at": "2023-01-07T10:24:23.000000Z"
+    },
+    {
+      "id": 63,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Azimpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:05:21.000000Z",
+      "updated_at": "2023-01-07T10:36:39.000000Z"
+    },
+    {
+      "id": 213,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "azompur,Uttara",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2023-03-25T09:57:29.000000Z",
+      "updated_at": "2023-03-25T09:57:29.000000Z"
+    },
+    {
+      "id": 27,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Badda",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:51:05.000000Z",
+      "updated_at": "2023-01-07T10:44:12.000000Z"
+    },
+    {
+      "id": 77,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Bakshibazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:11:35.000000Z",
+      "updated_at": "2023-01-07T10:32:29.000000Z"
+    },
+    {
+      "id": 91,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Balughat",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:53:54.000000Z",
+      "updated_at": "2023-01-07T10:29:38.000000Z"
+    },
+    {
+      "id": 2,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Banani",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:33:31.000000Z",
+      "updated_at": "2023-01-03T18:29:56.000000Z"
+    },
+    {
+      "id": 3,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Banani DOHS",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:33:56.000000Z",
+      "updated_at": "2023-01-03T18:30:19.000000Z"
+    },
+    {
+      "id": 19,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Banasree",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:40:17.000000Z",
+      "updated_at": "2023-01-07T10:45:55.000000Z"
+    },
+    {
+      "id": 72,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Bangshal",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:09:13.000000Z",
+      "updated_at": "2023-01-07T10:35:00.000000Z"
+    },
+    {
+      "id": 4,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Baridhara Diplomatic Zone",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:34:30.000000Z",
+      "updated_at": "2023-01-03T18:30:35.000000Z"
+    },
+    {
+      "id": 5,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Baridhara DOHS",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:34:57.000000Z",
+      "updated_at": "2023-01-03T18:31:29.000000Z"
+    },
+    {
+      "id": 6,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Baridhara J Block",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:35:32.000000Z",
+      "updated_at": "2023-01-03T18:31:11.000000Z"
+    },
+    {
+      "id": 35,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Basabo",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:54:12.000000Z",
+      "updated_at": "2023-01-07T10:42:40.000000Z"
+    },
+    {
+      "id": 7,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Bashundhara R/A",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:35:58.000000Z",
+      "updated_at": "2023-01-03T18:31:45.000000Z"
+    },
+    {
+      "id": 208,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Basundhara",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2023-01-05T10:45:36.000000Z",
+      "updated_at": "2023-01-07T10:47:56.000000Z"
+    },
+    {
+      "id": 105,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Bawnia",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:00:01.000000Z",
+      "updated_at": "2023-01-07T10:23:46.000000Z"
+    },
+    {
+      "id": 21,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Boro Maghbazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:41:23.000000Z",
+      "updated_at": "2023-01-07T10:45:27.000000Z"
+    },
+    {
+      "id": 22,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Boro Moghbazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:46:51.000000Z",
+      "updated_at": "2023-01-07T10:45:13.000000Z"
+    },
+    {
+      "id": 68,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Central Road",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:07:16.000000Z",
+      "updated_at": "2023-01-07T10:35:44.000000Z"
+    },
+    {
+      "id": 71,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Chawkbazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:08:47.000000Z",
+      "updated_at": "2023-01-07T10:35:11.000000Z"
+    },
+    {
+      "id": 102,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Dakkhin Khan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:57:56.000000Z",
+      "updated_at": "2023-01-07T10:24:37.000000Z"
+    },
+    {
+      "id": 94,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Dhaka Cantonment",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:54:55.000000Z",
+      "updated_at": "2023-01-07T10:28:59.000000Z"
+    },
+    {
+      "id": 116,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Dhanmondi",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:03:37.000000Z",
+      "updated_at": "2023-01-07T10:14:22.000000Z"
+    },
+    {
+      "id": 48,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Dholpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:00:17.000000Z",
+      "updated_at": "2023-01-07T10:39:59.000000Z"
+    },
+    {
+      "id": 30,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "DIT Road",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:52:04.000000Z",
+      "updated_at": "2023-01-07T10:43:39.000000Z"
+    },
+    {
+      "id": 67,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Elephant Road",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:07:02.000000Z",
+      "updated_at": "2023-01-07T10:35:54.000000Z"
+    },
+    {
+      "id": 23,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Eskaton Road",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:47:16.000000Z",
+      "updated_at": "2023-01-07T10:44:55.000000Z"
+    },
+    {
+      "id": 101,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Faidabad Dakkhinkhan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:57:23.000000Z",
+      "updated_at": "2023-01-07T10:25:43.000000Z"
+    },
+    {
+      "id": 55,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Faridabad",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:02:50.000000Z",
+      "updated_at": "2023-01-07T10:38:28.000000Z"
+    },
+    {
+      "id": 140,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Farmgate",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:53:54.000000Z",
+      "updated_at": "2023-01-07T10:06:11.000000Z"
+    },
+    {
+      "id": 56,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Gendaria",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:03:07.000000Z",
+      "updated_at": "2023-01-07T10:38:16.000000Z"
+    },
+    {
+      "id": 43,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Gopibagh",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:57:23.000000Z",
+      "updated_at": "2023-01-07T10:40:56.000000Z"
+    },
+    {
+      "id": 24,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Goran",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:47:39.000000Z",
+      "updated_at": "2023-01-07T10:44:43.000000Z"
+    },
+    {
+      "id": 133,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Greenroad",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:33:18.000000Z",
+      "updated_at": "2023-01-07T10:14:08.000000Z"
+    },
+    {
+      "id": 41,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Gulisthan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:56:46.000000Z",
+      "updated_at": "2023-01-07T10:41:21.000000Z"
+    },
+    {
+      "id": 8,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Gulshan 1",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:36:22.000000Z",
+      "updated_at": "2023-01-03T18:32:02.000000Z"
+    },
+    {
+      "id": 61,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Hazaribagh",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:04:47.000000Z",
+      "updated_at": "2023-01-07T10:36:59.000000Z"
+    },
+    {
+      "id": 73,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Islampur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:09:26.000000Z",
+      "updated_at": "2023-01-07T10:34:43.000000Z"
+    },
+    {
+      "id": 46,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Jatrabari",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:58:30.000000Z",
+      "updated_at": "2023-01-07T10:40:22.000000Z"
+    },
+    {
+      "id": 62,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Jigatola",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:04:59.000000Z",
+      "updated_at": "2023-01-07T10:36:49.000000Z"
+    },
+    {
+      "id": 54,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Jurain",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:02:16.000000Z",
+      "updated_at": "2023-01-07T10:38:39.000000Z"
+    },
+    {
+      "id": 49,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kadamtoli",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:00:32.000000Z",
+      "updated_at": "2023-01-07T10:39:37.000000Z"
+    },
+    {
+      "id": 90,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kafrul",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:53:37.000000Z",
+      "updated_at": "2023-01-07T10:29:49.000000Z"
+    },
+    {
+      "id": 143,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kalabagan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:54:43.000000Z",
+      "updated_at": "2023-01-07T09:16:59.000000Z"
+    },
+    {
+      "id": 138,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kallayanpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:53:17.000000Z",
+      "updated_at": "2023-01-07T10:07:18.000000Z"
+    },
+    {
+      "id": 40,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kamlapur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:56:33.000000Z",
+      "updated_at": "2023-01-07T10:41:38.000000Z"
+    },
+    {
+      "id": 141,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Karwan Bazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:54:09.000000Z",
+      "updated_at": "2023-01-07T10:00:25.000000Z"
+    },
+    {
+      "id": 69,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kathal Bagan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:08:02.000000Z",
+      "updated_at": "2023-01-07T10:35:33.000000Z"
+    },
+    {
+      "id": 99,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kawla",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:56:56.000000Z",
+      "updated_at": "2023-01-07T10:26:49.000000Z"
+    },
+    {
+      "id": 25,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Khilgaon",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:48:16.000000Z",
+      "updated_at": "2023-01-07T10:44:32.000000Z"
+    },
+    {
+      "id": 10,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Kuril",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:36:49.000000Z",
+      "updated_at": "2023-01-03T18:32:33.000000Z"
+    },
+    {
+      "id": 59,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Lalbag",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:04:14.000000Z",
+      "updated_at": "2023-01-07T10:37:27.000000Z"
+    },
+    {
+      "id": 75,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Laxmibazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:10:17.000000Z",
+      "updated_at": "2023-01-07T10:33:09.000000Z"
+    },
+    {
+      "id": 29,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Malibagh",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:51:52.000000Z",
+      "updated_at": "2023-01-07T10:43:50.000000Z"
+    },
+    {
+      "id": 34,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Manda",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:53:44.000000Z",
+      "updated_at": "2023-01-07T10:42:54.000000Z"
+    },
+    {
+      "id": 92,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Manikdi",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:54:08.000000Z",
+      "updated_at": "2023-01-07T10:29:26.000000Z"
+    },
+    {
+      "id": 47,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Maniknagar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:59:15.000000Z",
+      "updated_at": "2023-01-07T10:40:10.000000Z"
+    },
+    {
+      "id": 93,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Matikata",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:54:36.000000Z",
+      "updated_at": "2023-01-10T07:47:04.000000Z"
+    },
+    {
+      "id": 52,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Matuail",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:01:50.000000Z",
+      "updated_at": "2023-01-07T10:39:03.000000Z"
+    },
+    {
+      "id": 78,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 1",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:46:08.000000Z",
+      "updated_at": "2023-01-07T10:32:18.000000Z"
+    },
+    {
+      "id": 82,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 10",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:47:23.000000Z",
+      "updated_at": "2023-01-07T10:31:27.000000Z"
+    },
+    {
+      "id": 87,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 12",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:49:07.000000Z",
+      "updated_at": "2023-01-07T10:30:26.000000Z"
+    },
+    {
+      "id": 88,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 13",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:49:19.000000Z",
+      "updated_at": "2023-01-07T10:30:12.000000Z"
+    },
+    {
+      "id": 89,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 14",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:49:32.000000Z",
+      "updated_at": "2023-01-07T10:30:01.000000Z"
+    },
+    {
+      "id": 79,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 2",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:46:22.000000Z",
+      "updated_at": "2023-01-07T10:32:05.000000Z"
+    },
+    {
+      "id": 83,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur 6",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:47:44.000000Z",
+      "updated_at": "2023-01-07T10:31:16.000000Z"
+    },
+    {
+      "id": 86,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mirpur DOHS",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:48:46.000000Z",
+      "updated_at": "2023-01-07T10:30:37.000000Z"
+    },
+    {
+      "id": 212,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "mogbazar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2023-01-31T13:16:27.000000Z",
+      "updated_at": "2023-01-31T13:16:27.000000Z"
+    },
+    {
+      "id": 11,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mohakhali",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:37:12.000000Z",
+      "updated_at": "2023-01-07T09:17:27.000000Z"
+    },
+    {
+      "id": 12,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mohakhali DOHS",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:37:29.000000Z",
+      "updated_at": "2023-01-07T10:47:35.000000Z"
+    },
+    {
+      "id": 137,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mohammadpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:52:52.000000Z",
+      "updated_at": "2023-01-07T10:09:21.000000Z"
+    },
+    {
+      "id": 39,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Motijheel",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:56:20.000000Z",
+      "updated_at": "2023-01-07T10:41:50.000000Z"
+    },
+    {
+      "id": 33,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Mugda",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:53:17.000000Z",
+      "updated_at": "2023-01-07T10:43:08.000000Z"
+    },
+    {
+      "id": 9,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Nadda",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:36:35.000000Z",
+      "updated_at": "2023-01-03T18:32:18.000000Z"
+    },
+    {
+      "id": 13,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Nakhalpara",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:38:02.000000Z",
+      "updated_at": "2023-01-07T10:47:23.000000Z"
+    },
+    {
+      "id": 45,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Narinda",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:58:17.000000Z",
+      "updated_at": "2023-01-07T10:40:34.000000Z"
+    },
+    {
+      "id": 64,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "New Elephant Road",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:05:52.000000Z",
+      "updated_at": "2023-01-07T10:36:27.000000Z"
+    },
+    {
+      "id": 65,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "New Market",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:06:25.000000Z",
+      "updated_at": "2023-01-07T10:36:16.000000Z"
+    },
+    {
+      "id": 14,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Niketan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:38:20.000000Z",
+      "updated_at": "2023-01-07T10:47:11.000000Z"
+    },
+    {
+      "id": 15,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Nikunja 1",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:38:50.000000Z",
+      "updated_at": "2023-01-07T10:46:59.000000Z"
+    },
+    {
+      "id": 16,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Nikunja 2",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:39:11.000000Z",
+      "updated_at": "2023-01-07T10:46:40.000000Z"
+    },
+    {
+      "id": 66,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Nilkhet",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:06:38.000000Z",
+      "updated_at": "2023-01-07T10:36:05.000000Z"
+    },
+    {
+      "id": 85,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Pallabi",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:48:20.000000Z",
+      "updated_at": "2023-01-07T10:30:49.000000Z"
+    },
+    {
+      "id": 42,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Paltan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:57:09.000000Z",
+      "updated_at": "2023-01-07T10:41:11.000000Z"
+    },
+    {
+      "id": 142,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Panthapath",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:54:26.000000Z",
+      "updated_at": "2023-01-07T09:59:13.000000Z"
+    },
+    {
+      "id": 80,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Pirerbag",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:46:47.000000Z",
+      "updated_at": "2023-01-07T10:31:52.000000Z"
+    },
+    {
+      "id": 31,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Rampura",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:52:34.000000Z",
+      "updated_at": "2023-01-07T10:43:29.000000Z"
+    },
+    {
+      "id": 51,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Rayerbagh",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:01:38.000000Z",
+      "updated_at": "2023-01-07T10:39:14.000000Z"
+    },
+    {
+      "id": 84,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Rupnagar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:48:05.000000Z",
+      "updated_at": "2023-01-07T10:31:02.000000Z"
+    },
+    {
+      "id": 74,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Sadarghat",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:09:44.000000Z",
+      "updated_at": "2023-01-07T10:33:20.000000Z"
+    },
+    {
+      "id": 38,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Segunbagicha",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:55:55.000000Z",
+      "updated_at": "2023-01-07T10:42:05.000000Z"
+    },
+    {
+      "id": 70,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shahbag",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:08:18.000000Z",
+      "updated_at": "2023-01-07T10:35:23.000000Z"
+    },
+    {
+      "id": 60,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shahidnagar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:04:26.000000Z",
+      "updated_at": "2023-01-07T10:37:16.000000Z"
+    },
+    {
+      "id": 26,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shahjadpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:49:17.000000Z",
+      "updated_at": "2023-01-07T10:44:22.000000Z"
+    },
+    {
+      "id": 28,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shahjahanpur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:51:20.000000Z",
+      "updated_at": "2023-01-07T10:44:01.000000Z"
+    },
+    {
+      "id": 53,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shampur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:02:03.000000Z",
+      "updated_at": "2023-01-07T10:38:51.000000Z"
+    },
+    {
+      "id": 50,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shanir Akhra",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:00:57.000000Z",
+      "updated_at": "2023-01-07T10:39:27.000000Z"
+    },
+    {
+      "id": 36,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shantinagar",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:54:25.000000Z",
+      "updated_at": "2023-01-07T10:42:29.000000Z"
+    },
+    {
+      "id": 81,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shewrapara",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:47:00.000000Z",
+      "updated_at": "2023-01-07T10:31:41.000000Z"
+    },
+    {
+      "id": 37,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shiddeshwari",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:55:22.000000Z",
+      "updated_at": "2023-01-07T10:42:18.000000Z"
+    },
+    {
+      "id": 135,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Shyamoli",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-03T07:52:04.000000Z",
+      "updated_at": "2023-01-07T10:13:47.000000Z"
+    },
+    {
+      "id": 20,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "South Banadree",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:41:01.000000Z",
+      "updated_at": "2023-01-07T10:45:38.000000Z"
+    },
+    {
+      "id": 57,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Sutrapur",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:03:33.000000Z",
+      "updated_at": "2023-01-07T10:37:44.000000Z"
+    },
+    {
+      "id": 17,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Tejgaon",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:39:41.000000Z",
+      "updated_at": "2023-01-07T10:46:29.000000Z"
+    },
+    {
+      "id": 104,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Turag",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:59:28.000000Z",
+      "updated_at": "2023-01-07T10:24:10.000000Z"
+    },
+    {
+      "id": 100,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttar Khan",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:57:08.000000Z",
+      "updated_at": "2023-01-07T10:25:57.000000Z"
+    },
+    {
+      "id": 98,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 1",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:56:32.000000Z",
+      "updated_at": "2023-01-07T10:27:10.000000Z"
+    },
+    {
+      "id": 106,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 10",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:00:14.000000Z",
+      "updated_at": "2023-01-07T10:17:16.000000Z"
+    },
+    {
+      "id": 109,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 11",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:01:22.000000Z",
+      "updated_at": "2023-01-07T10:16:35.000000Z"
+    },
+    {
+      "id": 108,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 12",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:01:07.000000Z",
+      "updated_at": "2023-01-07T10:16:50.000000Z"
+    },
+    {
+      "id": 114,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 13",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:02:54.000000Z",
+      "updated_at": "2023-01-07T10:15:31.000000Z"
+    },
+    {
+      "id": 110,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 14",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:01:41.000000Z",
+      "updated_at": "2023-01-07T10:16:24.000000Z"
+    },
+    {
+      "id": 115,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 15",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:03:24.000000Z",
+      "updated_at": "2023-01-07T10:14:46.000000Z"
+    },
+    {
+      "id": 113,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 3",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:02:41.000000Z",
+      "updated_at": "2023-01-07T10:15:41.000000Z"
+    },
+    {
+      "id": 95,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 4",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:55:24.000000Z",
+      "updated_at": "2023-01-07T10:28:46.000000Z"
+    },
+    {
+      "id": 107,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 5",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:00:28.000000Z",
+      "updated_at": "2023-01-07T10:17:03.000000Z"
+    },
+    {
+      "id": 96,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 6",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:55:39.000000Z",
+      "updated_at": "2023-01-07T10:28:34.000000Z"
+    },
+    {
+      "id": 111,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 7",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:02:05.000000Z",
+      "updated_at": "2023-01-07T10:16:13.000000Z"
+    },
+    {
+      "id": 97,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 8",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T17:56:05.000000Z",
+      "updated_at": "2023-01-07T10:28:22.000000Z"
+    },
+    {
+      "id": 112,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Uttara Sector 9",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T18:02:18.000000Z",
+      "updated_at": "2023-01-07T10:15:54.000000Z"
+    },
+    {
+      "id": 18,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Vatara",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:40:02.000000Z",
+      "updated_at": "2023-01-07T10:46:17.000000Z"
+    },
+    {
+      "id": 44,
+      "inside": 1,
+      "zone_name": "Dhaka Hub",
+      "district": "Dhaka",
+      "area": "Wari",
+      "district_id": 47,
+      "zone_id": 3,
+      "post_code": null,
+      "h_delivery": null,
+      "oneRe": null,
+      "oneUr": null,
+      "plusRe": null,
+      "plusUr": null,
+      "cod": null,
+      "insurance": null,
+      "status": 0,
+      "created_at": "2022-12-02T16:57:43.000000Z",
+      "updated_at": "2023-01-07T10:40:45.000000Z"
+    }
+  ]
+}
               </code>
             </pre>
-          <table id="customers">
-            <tr>
-              <th>Options</th>
-              <th>Value</th>
-              <th>Default</th>
-            </tr>
-            <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
-            </tr>
-          </table>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
+
+            <h5>PARAMS</h5>
+             <p>ID    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       47</p>
+          
+        
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">District (GET)</h3>
+          <p>This endpoint makes an HTTP GET request to retrieve a list of courier distribution centers. The response will have a status code of 200, indicating a successful request, and the data will be in JSON format. The response will include a boolean status, a message, and an array of distribution center objects, each containing an ID, name, Bengali name, zone ID, inside value, creation timestamp, and update timestamp.</p>
+              <h5>Example Request</h5>
+              <pre class="code code--block">
+              <code>
+                 --location 'https://example.com/api/distList'
+              </code>
+            </pre>
+             <h5>Example Request</h5>
+              <pre class="code code--block">
+              <code>
+                 {
+  "Status": true,
+  "message": "District List",
+  "data": [
+    {
+      "id": 28,
+      "name": "Bagerhat",
+      "bn_name": "বাগেরহাট",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:11.000000Z"
+    },
+    {
+      "id": 11,
+      "name": "Bandarban",
+      "bn_name": "বান্দরবান",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:17.000000Z"
+    },
+    {
+      "id": 35,
+      "name": "Barguna",
+      "bn_name": "বরগুনা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:24.000000Z"
+    },
+    {
+      "id": 33,
+      "name": "Barishal",
+      "bn_name": "বরিশাল",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:29.000000Z"
+    },
+    {
+      "id": 34,
+      "name": "Bhola",
+      "bn_name": "ভোলা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:35.000000Z"
+    },
+    {
+      "id": 14,
+      "name": "Bogura",
+      "bn_name": "বগুড়া",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:41.000000Z"
+    },
+    {
+      "id": 3,
+      "name": "Brahmanbaria",
+      "bn_name": "ব্রাহ্মণবাড়িয়া",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:47.000000Z"
+    },
+    {
+      "id": 6,
+      "name": "Chandpur",
+      "bn_name": "চাঁদপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:54.000000Z"
+    },
+    {
+      "id": 18,
+      "name": "Chapainawabganj",
+      "bn_name": "চাঁপাইনবাবগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:17:01.000000Z"
+    },
+    {
+      "id": 8,
+      "name": "Chattogram",
+      "bn_name": "চট্টগ্রাম",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:43:07.000000Z"
+    },
+    {
+      "id": 24,
+      "name": "Chuadanga",
+      "bn_name": "চুয়াডাঙ্গা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:43:20.000000Z"
+    },
+    {
+      "id": 9,
+      "name": "Coxsbazar",
+      "bn_name": "কক্সবাজার",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:17:13.000000Z"
+    },
+    {
+      "id": 1,
+      "name": "Cumilla",
+      "bn_name": "কুমিল্লা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:21:43.000000Z"
+    },
+    {
+      "id": 47,
+      "name": "Dhaka",
+      "bn_name": "ঢাকা",
+      "zone_id": 12,
+      "inside": 1,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T05:46:37.000000Z"
+    },
+    {
+      "id": 54,
+      "name": "Dinajpur",
+      "bn_name": "দিনাজপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:44:43.000000Z"
+    },
+    {
+      "id": 67,
+      "name": "Dohar",
+      "bn_name": "দোহার",
+      "zone_id": 14,
+      "inside": 2,
+      "created_at": "2022-12-11T11:27:13.000000Z",
+      "updated_at": "2022-12-11T11:27:13.000000Z"
+    },
+    {
+      "id": 52,
+      "name": "Faridpur",
+      "bn_name": "ফরিদপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:21:35.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "Feni",
+      "bn_name": "ফেনী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:45:36.000000Z"
+    },
+    {
+      "id": 57,
+      "name": "Gaibandha",
+      "bn_name": "গাইবান্ধা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:45:45.000000Z"
+    },
+    {
+      "id": 41,
+      "name": "Gazipur",
+      "bn_name": "গাজীপুর",
+      "zone_id": 13,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2023-01-07T10:02:44.000000Z"
+    },
+    {
+      "id": 51,
+      "name": "Gopalganj",
+      "bn_name": "গোপালগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:46:33.000000Z"
+    },
+    {
+      "id": 38,
+      "name": "Habiganj",
+      "bn_name": "হবিগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:47:16.000000Z"
+    },
+    {
+      "id": 63,
+      "name": "Jamalpur",
+      "bn_name": "জামালপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:47:32.000000Z"
+    },
+    {
+      "id": 30,
+      "name": "Jhalakathi",
+      "bn_name": "ঝালকাঠি",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:16:04.000000Z"
+    },
+    {
+      "id": 29,
+      "name": "Jhenaidah",
+      "bn_name": "ঝিনাইদহ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:47:42.000000Z"
+    },
+    {
+      "id": 20,
+      "name": "Josshore",
+      "bn_name": "যশোর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:47:50.000000Z"
+    },
+    {
+      "id": 17,
+      "name": "Joypurhat",
+      "bn_name": "জয়পুরহাট",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:47:56.000000Z"
+    },
+    {
+      "id": 66,
+      "name": "Keraniganj",
+      "bn_name": "কেরানীগঞ্জ",
+      "zone_id": 13,
+      "inside": 2,
+      "created_at": "2022-12-11T11:27:13.000000Z",
+      "updated_at": "2022-12-13T05:29:37.000000Z"
+    },
+    {
+      "id": 10,
+      "name": "Khagrachhari",
+      "bn_name": "খাগড়াছড়ি",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:02.000000Z"
+    },
+    {
+      "id": 27,
+      "name": "Khulna",
+      "bn_name": "খুলনা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:09.000000Z"
+    },
+    {
+      "id": 45,
+      "name": "Kishoreganj",
+      "bn_name": "কিশোরগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:23.000000Z"
+    },
+    {
+      "id": 60,
+      "name": "Kurigram",
+      "bn_name": "কুড়িগ্রাম",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:31.000000Z"
+    },
+    {
+      "id": 25,
+      "name": "Kushtia",
+      "bn_name": "কুষ্টিয়া",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:37.000000Z"
+    },
+    {
+      "id": 7,
+      "name": "Lakshmipur",
+      "bn_name": "লক্ষ্মীপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:45.000000Z"
+    },
+    {
+      "id": 55,
+      "name": "Lalmonirhat",
+      "bn_name": "লালমনিরহাট",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:48:53.000000Z"
+    },
+    {
+      "id": 50,
+      "name": "Madaripur",
+      "bn_name": "মাদারীপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:01.000000Z"
+    },
+    {
+      "id": 26,
+      "name": "Magura",
+      "bn_name": "মাগুরা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:10.000000Z"
+    },
+    {
+      "id": 46,
+      "name": "Manikganj",
+      "bn_name": "মানিকগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:21.000000Z"
+    },
+    {
+      "id": 22,
+      "name": "Meherpur",
+      "bn_name": "মেহেরপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:29.000000Z"
+    },
+    {
+      "id": 37,
+      "name": "Moulvibazar",
+      "bn_name": "মৌলভীবাজার",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:37.000000Z"
+    },
+    {
+      "id": 48,
+      "name": "Munshiganj",
+      "bn_name": "মুন্সিগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:49:50.000000Z"
+    },
+    {
+      "id": 62,
+      "name": "Mymensingh",
+      "bn_name": "ময়মনসিংহ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:50:03.000000Z"
+    },
+    {
+      "id": 19,
+      "name": "Naogaon",
+      "bn_name": "নওগাঁ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:50:28.000000Z"
+    },
+    {
+      "id": 23,
+      "name": "Narail",
+      "bn_name": "নড়াইল",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:50:37.000000Z"
+    },
+    {
+      "id": 43,
+      "name": "Narayanganj",
+      "bn_name": "নারায়ণগঞ্জ",
+      "zone_id": 13,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2023-01-07T10:02:26.000000Z"
+    },
+    {
+      "id": 40,
+      "name": "Narsingdi",
+      "bn_name": "নরসিংদী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:51:39.000000Z"
+    },
+    {
+      "id": 16,
+      "name": "Natore",
+      "bn_name": "নাটোর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:51:47.000000Z"
+    },
+    {
+      "id": 64,
+      "name": "Netrokona",
+      "bn_name": "নেত্রকোণা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:51:54.000000Z"
+    },
+    {
+      "id": 56,
+      "name": "Nilphamari",
+      "bn_name": "নীলফামারী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:02.000000Z"
+    },
+    {
+      "id": 5,
+      "name": "Noakhali",
+      "bn_name": "নোয়াখালী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:11.000000Z"
+    },
+    {
+      "id": 13,
+      "name": "Pabna",
+      "bn_name": "পাবনা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:21.000000Z"
+    },
+    {
+      "id": 53,
+      "name": "Panchagarh",
+      "bn_name": "পঞ্চগড়",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:28.000000Z"
+    },
+    {
+      "id": 31,
+      "name": "Patuakhali",
+      "bn_name": "পটুয়াখালী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:35.000000Z"
+    },
+    {
+      "id": 32,
+      "name": "Pirojpur",
+      "bn_name": "পিরোজপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:42.000000Z"
+    },
+    {
+      "id": 49,
+      "name": "Rajbari",
+      "bn_name": "রাজবাড়ী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:52:49.000000Z"
+    },
+    {
+      "id": 15,
+      "name": "Rajshahi",
+      "bn_name": "রাজশাহী",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:06.000000Z"
+    },
+    {
+      "id": 4,
+      "name": "Rangamati",
+      "bn_name": "রাঙ্গামাটি",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:13.000000Z"
+    },
+    {
+      "id": 59,
+      "name": "Rangpur",
+      "bn_name": "রংপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:21.000000Z"
+    },
+    {
+      "id": 21,
+      "name": "Satkhira",
+      "bn_name": "সাতক্ষীরা",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:27.000000Z"
+    },
+    {
+      "id": 65,
+      "name": "Savar",
+      "bn_name": "সাভার",
+      "zone_id": 13,
+      "inside": 2,
+      "created_at": "2022-12-11T10:25:35.000000Z",
+      "updated_at": "2022-12-11T11:24:18.000000Z"
+    },
+    {
+      "id": 42,
+      "name": "Shariatpur",
+      "bn_name": "শরীয়তপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:46.000000Z"
+    },
+    {
+      "id": 61,
+      "name": "Sherpur",
+      "bn_name": "শেরপুর",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:53:56.000000Z"
+    },
+    {
+      "id": 12,
+      "name": "Sirajganj",
+      "bn_name": "সিরাজগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:54:05.000000Z"
+    },
+    {
+      "id": 39,
+      "name": "Sunamganj",
+      "bn_name": "সুনামগঞ্জ",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:54:14.000000Z"
+    },
+    {
+      "id": 36,
+      "name": "Sylhet",
+      "bn_name": "সিলেট",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T07:42:35.000000Z"
+    },
+    {
+      "id": 44,
+      "name": "Tangail",
+      "bn_name": "টাঙ্গাইল",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:19:29.000000Z"
+    },
+    {
+      "id": 58,
+      "name": "Thakurgaon",
+      "bn_name": "ঠাকুরগাঁও",
+      "zone_id": 14,
+      "inside": 0,
+      "created_at": "2022-12-01T02:56:37.000000Z",
+      "updated_at": "2022-12-24T06:19:22.000000Z"
+    }
+  ]
+}
+              </code>
+            </pre>
           <hr />
         </section>
      <section class="js-section">
-          <h3 class="section__title">Weight</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
+          <h3 class="section__title">Weight (GET</h3>
+          <p>This HTTP GET request retrieves the list of weights from the courier API. The response will be in JSON format with a 200 status code. The response will include a boolean status, a message, and an array of weight data objects, each containing various properties such as id, title, and other attributes related to weight calculations.</p>
+             <h5>Example Request</h5>
               <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+              --location 'https://example.com/api/weights'
               </code>
             </pre>
-          <table id="customers">
-            <tr>
-              <th>Options</th>
-              <th>Value</th>
-              <th>Default</th>
-            </tr>
-            <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
-            </tr>
-          </table>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-          <hr />
+               <h5>Example Response (BODY)</h5>
+              <pre class="code code--block">
+              <code>
+              {
+  "Status": true,
+  "message": "Weights List",
+  "data": [
+    {
+      "id": 10,
+      "title": "Upto 2 Kg",
+      "ind_Re": 80,
+      "ind_Ur": 100,
+      "out_Re": 150,
+      "out_Ur": 200,
+      "sub_Re": 120,
+      "sub_Ur": 150,
+      "ind_ReC": 0,
+      "sub_ReC": 0,
+      "out_ReC": 0,
+      "insurance": 0,
+      "cod": 1,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "1",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2023-10-02T03:40:02.000000Z",
+      "updated_at": "2024-04-21T12:19:27.000000Z"
+    },
+    {
+      "id": 11,
+      "title": "Upto 1 Kg",
+      "ind_Re": 80,
+      "ind_Ur": 100,
+      "out_Re": 150,
+      "out_Ur": 200,
+      "sub_Re": 120,
+      "sub_Ur": 150,
+      "ind_ReC": 0,
+      "sub_ReC": 0,
+      "out_ReC": 0,
+      "insurance": 0,
+      "cod": 1,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "1",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2023-12-22T05:31:15.000000Z",
+      "updated_at": "2024-03-18T22:51:09.000000Z"
+    },
+    {
+      "id": 12,
+      "title": "Upto 3 Kg",
+      "ind_Re": 80,
+      "ind_Ur": 100,
+      "out_Re": 150,
+      "out_Ur": 200,
+      "sub_Re": 120,
+      "sub_Ur": 150,
+      "ind_ReC": 0,
+      "sub_ReC": 0,
+      "out_ReC": 0,
+      "insurance": 0,
+      "cod": 1,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "1",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T07:42:36.000000Z",
+      "updated_at": "2024-04-21T12:20:24.000000Z"
+    },
+    {
+      "id": 13,
+      "title": "Upto 4 Kg",
+      "ind_Re": 105,
+      "ind_Ur": 140,
+      "out_Re": 200,
+      "out_Ur": 0,
+      "sub_Re": 140,
+      "sub_Ur": 175,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T07:47:43.000000Z",
+      "updated_at": "2024-02-25T07:51:12.000000Z"
+    },
+    {
+      "id": 14,
+      "title": "Upto 5 Kg",
+      "ind_Re": 120,
+      "ind_Ur": 500,
+      "out_Re": 225,
+      "out_Ur": 700,
+      "sub_Re": 160,
+      "sub_Ur": 600,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T07:53:38.000000Z",
+      "updated_at": "2024-03-06T09:48:10.000000Z"
+    },
+    {
+      "id": 15,
+      "title": "Upto 6 Kg",
+      "ind_Re": 135,
+      "ind_Ur": 180,
+      "out_Re": 250,
+      "out_Ur": 0,
+      "sub_Re": 180,
+      "sub_Ur": 225,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T07:56:46.000000Z",
+      "updated_at": "2024-02-25T07:56:46.000000Z"
+    },
+    {
+      "id": 16,
+      "title": "Upto 7 Kg",
+      "ind_Re": 150,
+      "ind_Ur": 200,
+      "out_Re": 275,
+      "out_Ur": 0,
+      "sub_Re": 200,
+      "sub_Ur": 250,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T08:03:19.000000Z",
+      "updated_at": "2024-02-25T08:03:19.000000Z"
+    },
+    {
+      "id": 17,
+      "title": "Upto 8 Kg",
+      "ind_Re": 165,
+      "ind_Ur": 220,
+      "out_Re": 300,
+      "out_Ur": 0,
+      "sub_Re": 220,
+      "sub_Ur": 275,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T08:10:15.000000Z",
+      "updated_at": "2024-02-25T08:10:15.000000Z"
+    },
+    {
+      "id": 18,
+      "title": "Upto 9 Kg",
+      "ind_Re": 180,
+      "ind_Ur": 240,
+      "out_Re": 325,
+      "out_Ur": 0,
+      "sub_Re": 240,
+      "sub_Ur": 300,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T08:53:22.000000Z",
+      "updated_at": "2024-02-25T08:53:22.000000Z"
+    },
+    {
+      "id": 19,
+      "title": "Upto 10 Kg",
+      "ind_Re": 195,
+      "ind_Ur": 260,
+      "out_Re": 350,
+      "out_Ur": 0,
+      "sub_Re": 260,
+      "sub_Ur": 325,
+      "ind_ReC": 60,
+      "sub_ReC": 100,
+      "out_ReC": 125,
+      "insurance": 0,
+      "cod": 0,
+      "outside_dhaka_cod": "1",
+      "sub_dhaka_cod": "0",
+      "status": 1,
+      "create_by": 1,
+      "created_at": "2024-02-25T09:07:01.000000Z",
+      "updated_at": "2024-02-25T09:07:01.000000Z"
+    }
+  ]
+}
+              </code>
+            </pre>
+         <hr />
         </section>
         <section class="js-section">
-          <h3 class="section__title">Product_Category</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
-              <pre class="code code--block">
+          <h3 class="section__title">Product Category</h3>
+          <p>This API endpoint sends an HTTP GET request to retrieve a list of courier categories from the specified URL.</p>
+           <p>The response received from the last execution had a status code of 200 and a content type of application/json. The response body included a "Status" field indicating the success status, a "message" field for any additional information, and a "data" array containing courier category objects with "id", "name", "status", "created_at", and "updated_at" attributes.</p>
+           <p>You can use this endpoint to fetch courier categories for further processing or display in your application.</p> 
+           <h5>Example Request</h5>
+           <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+               --location 'https://example.com/api/category'
               </code>
             </pre>
-          <table id="customers">
-            <tr>
-              <th>Options</th>
-              <th>Value</th>
-              <th>Default</th>
-            </tr>
-            <tr>
-              <td>encryption</td>
-              <td>encrypt all notes before saving. If turned on, it requires password to open the file.</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>highlighting</td>
-              <td>Show syntax highlight on markdown text.</td>
-              <td>true</td>
-            </tr>
-            <tr>
-              <td>prettyTable</td>
-              <td>Render table with Scribbler’s pretty table style.</td>
-              <td>true</td>
-            </tr>
-          </table>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-          <hr />
+             <h5>Example Response (BODY</h5>
+           <pre class="code code--block">
+              <code>
+               {
+  "Status": true,
+  "message": "Category List",
+  "data": [
+    {
+      "id": 21,
+      "name": "Pet products",
+      "status": 1,
+      "created_at": "2024-03-14T17:38:20.000000Z",
+      "updated_at": "2024-03-14T17:38:20.000000Z"
+    },
+    {
+      "id": 20,
+      "name": "Pet products",
+      "status": 1,
+      "created_at": "2024-03-14T17:38:06.000000Z",
+      "updated_at": "2024-03-14T17:38:06.000000Z"
+    },
+    {
+      "id": 19,
+      "name": "Phone Accessories",
+      "status": 1,
+      "created_at": "2024-03-14T17:36:18.000000Z",
+      "updated_at": "2024-03-14T17:36:18.000000Z"
+    },
+    {
+      "id": 18,
+      "name": "Home Appliance",
+      "status": 1,
+      "created_at": "2024-03-14T17:35:53.000000Z",
+      "updated_at": "2024-03-14T17:35:53.000000Z"
+    },
+    {
+      "id": 17,
+      "name": "Computer Accessories",
+      "status": 1,
+      "created_at": "2024-03-14T17:35:21.000000Z",
+      "updated_at": "2024-03-14T17:35:21.000000Z"
+    },
+    {
+      "id": 16,
+      "name": "kids Clothing",
+      "status": 1,
+      "created_at": "2024-03-14T03:21:06.000000Z",
+      "updated_at": "2024-03-14T03:21:06.000000Z"
+    },
+    {
+      "id": 15,
+      "name": "Women Clothing",
+      "status": 1,
+      "created_at": "2024-03-14T03:20:05.000000Z",
+      "updated_at": "2024-03-14T03:20:05.000000Z"
+    },
+    {
+      "id": 14,
+      "name": "Men Clothing",
+      "status": 1,
+      "created_at": "2024-03-14T03:19:08.000000Z",
+      "updated_at": "2024-03-14T03:20:32.000000Z"
+    },
+    {
+      "id": 13,
+      "name": "Others",
+      "status": 1,
+      "created_at": "2024-03-13T22:56:46.000000Z",
+      "updated_at": "2024-03-13T22:56:46.000000Z"
+    },
+    {
+      "id": 12,
+      "name": "Watch & Sunglass",
+      "status": 1,
+      "created_at": "2022-12-07T17:15:23.000000Z",
+      "updated_at": "2022-12-07T17:15:23.000000Z"
+    },
+    {
+      "id": 11,
+      "name": "Electronics and Gadgets",
+      "status": 1,
+      "created_at": "2022-12-07T17:15:08.000000Z",
+      "updated_at": "2024-03-14T17:36:48.000000Z"
+    },
+    {
+      "id": 10,
+      "name": "Lifestyle",
+      "status": 1,
+      "created_at": "2022-12-07T17:14:46.000000Z",
+      "updated_at": "2022-12-07T17:14:46.000000Z"
+    },
+    {
+      "id": 9,
+      "name": "Organic",
+      "status": 1,
+      "created_at": "2022-12-07T17:14:32.000000Z",
+      "updated_at": "2022-12-07T17:14:32.000000Z"
+    },
+    {
+      "id": 8,
+      "name": "Jewelry",
+      "status": 1,
+      "created_at": "2022-12-07T17:11:16.000000Z",
+      "updated_at": "2022-12-07T17:11:16.000000Z"
+    },
+    {
+      "id": 7,
+      "name": "Medicine",
+      "status": 1,
+      "created_at": "2022-12-07T17:11:00.000000Z",
+      "updated_at": "2022-12-07T17:11:00.000000Z"
+    },
+    {
+      "id": 6,
+      "name": "Document",
+      "status": 1,
+      "created_at": "2022-12-07T17:10:51.000000Z",
+      "updated_at": "2022-12-07T17:10:51.000000Z"
+    },
+    {
+      "id": 5,
+      "name": "Cosmetics",
+      "status": 1,
+      "created_at": "2022-12-07T17:10:41.000000Z",
+      "updated_at": "2022-12-07T17:10:41.000000Z"
+    },
+    {
+      "id": 4,
+      "name": "Leather Goods",
+      "status": 1,
+      "created_at": "2022-12-07T17:09:29.000000Z",
+      "updated_at": "2022-12-07T17:09:29.000000Z"
+    },
+    {
+      "id": 3,
+      "name": "Accessories",
+      "status": 1,
+      "created_at": "2022-12-07T17:09:16.000000Z",
+      "updated_at": "2022-12-07T17:09:16.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "Fashion Item",
+      "status": 1,
+      "created_at": "2022-11-10T09:33:57.000000Z",
+      "updated_at": "2022-11-10T09:33:57.000000Z"
+    },
+    {
+      "id": 1,
+      "name": "Dry Food",
+      "status": 1,
+      "created_at": "2022-11-10T09:33:45.000000Z",
+      "updated_at": "2022-12-07T17:09:47.000000Z"
+    }
+  ]
+}
+              </code>
+            </pre>
+         
+           <hr />
         </section>
+        <h2 style="text-align:center;">END</h2>
       </article>
     </div>
 
